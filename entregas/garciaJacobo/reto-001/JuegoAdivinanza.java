@@ -11,6 +11,7 @@ public class JuegoAdivinanza {
         int maxIntentos = 10; 
 
         int dificultad = mostrarMenuDificultad(scanner);
+        int[] configuracion = elegirOpcionDificultad(dificultad);
 
         if (dificultad == 1) {
             maxNumero = 50;
