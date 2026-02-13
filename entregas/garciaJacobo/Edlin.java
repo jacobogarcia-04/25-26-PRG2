@@ -19,22 +19,53 @@ public class Edlin {
 
         int[] lineaActiva = new int[1];
 
-        mostrarMenu(fichero, lineaActiva);
-        preguntarLineaActiva(lineaActiva);
-        mostrarMenu(fichero, lineaActiva);
+        do {
+            mostrarMenu(fichero, lineaActiva);
 
+        } while (botonesAccion(fichero, lineaActiva));
+
+    }
+
+    private static void intercambiarFilas(String[] fichero) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Que linea deseas intercambiar?");
+        int linea1 = scanner.nextInt();
+        System.out.println("por que linea la intercambias?");
+        int linea2 = scanner.nextInt();
+
+        String temporal1 = fichero[linea1];
+
+        fichero[linea1] = fichero[linea2];
+        fichero[linea2] = temporal1;
+
+    }
+
+    private static boolean botonesAccion(String[] fichero, int[] lineaActiva) {
+        boolean estaFuncionando = true;
+        switch (askChar()) {
+            case 'l', 'L' -> preguntarLineaActiva(lineaActiva);
+            case 'e', 'E' -> editar(lineaActiva, fichero);
+            case 'i', 'I' -> intercambiarFilas(fichero);
+            case 's', 'S' -> estaFuncionando = false;
+
+        }
+        return estaFuncionando;
+    }
+
+    private static char askChar() {
+        return new Scanner(System.in).next().charAt(0);
     }
 
     private static void preguntarLineaActiva(int[] lineaActiva) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Que linea activa eliges?");
+        System.out.print("que linea activa eliges?");
         lineaActiva[0] = scanner.nextInt();
 
     }
 
     private static void editar(int[] lineaActiva, String[] fichero) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Que linea activa eliges?");
+        System.out.print("Editando la linea " + lineaActiva[0]);
         fichero[lineaActiva[0]] = scanner.nextLine();
     }
 
