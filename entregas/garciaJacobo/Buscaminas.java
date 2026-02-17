@@ -17,7 +17,18 @@ public class Buscaminas {
         final int NUMERO_MINAS = 3;
         colocarMinas(superficie, NUMERO_MINAS);
         mostrarMapa(superficie);
-        preguntarCordenadas(superficie);
+        int[] cordenadas = preguntarCordenadas(superficie);
+        despejarSuperficie(superficie, cordenadas);
+        mostrarMapa(superficie);
+    }
+
+    private static void despejarSuperficie(int[][] superficie, int[] cordenadas) {
+        int y = cordenadas[0];
+        int x = cordenadas[1];
+
+        superficie[y][x] = superficie[y][x] < 0
+                ? superficie[y][x] * -1
+                : superficie[y][x];
     }
 
     private static int[] preguntarCordenadas(int[][] superficie) {
@@ -51,19 +62,19 @@ public class Buscaminas {
     }
 
     private static String mapearSuperficie(int nºmatriz) {
-        final String TILES[] = { " - ", ".", "*" };
+        final String TILES[] = { " - ", " . ", " * " };
         return nºmatriz < 0 ? TILES[0] : TILES[nºmatriz];
     }
 
     private static void mostrarMapa(int[][] superficie) {
         System.out.println("  ===================");
-        System.out.println("  1  2  3  4  5  6  7");
+        System.out.println("  0  1  2  3  4  5  6");
 
         for (int i = 0; i < superficie.length; i++) {
             System.out.print(i + "");
             for (int j = 0; j < superficie[i].length; j++) {
                 int tile = superficie[i][j];
-                System.out.print(mapearSuperficie(tile));
+                System.out.print(String.format("%3s", mapearSuperficie(tile)));
             }
             System.out.println();
         }
