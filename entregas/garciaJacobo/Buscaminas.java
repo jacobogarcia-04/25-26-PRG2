@@ -1,5 +1,7 @@
 package entregas.garciaJacobo;
 
+import java.util.Scanner;
+
 public class Buscaminas {
     public static void main(String[] args) {
 
@@ -12,9 +14,40 @@ public class Buscaminas {
                 { -1, -1, -1, -1, -1, -1, -1 }
 
         };
-        final int NUMERO_MINAS=3;
-        
+        final int NUMERO_MINAS = 3;
+        colocarMinas(superficie, NUMERO_MINAS);
         mostrarMapa(superficie);
+        preguntarCordenadas(superficie);
+    }
+
+    private static int[] preguntarCordenadas(int[][] superficie) {
+        Scanner scanner = new Scanner(System.in);
+        int y;
+        int x;
+        int[] cordenadas = null;
+        boolean tieneCordenada = false;
+        do {
+            System.out.println(" cordenada Y ?");
+            y = scanner.nextInt();
+            System.out.println("cordenada X ?");
+            x = scanner.nextInt();
+            cordenadas = new int[] { y, x };
+            tieneCordenada = cordenadaValida(superficie, cordenadas);
+        } while (!tieneCordenada);
+
+        return cordenadas;
+
+    }
+
+    private static boolean cordenadaValida(int[][] superficie, int[] cordenadas) {
+        int y = cordenadas[0];
+        int x = cordenadas[1];
+        if (y < 0 || y >= superficie.length || x >= superficie[0].length || x < 0) {
+            System.out.println("CORDENADAS INCORRECTAS");
+            return false;
+        }
+        return true;
+
     }
 
     private static String mapearSuperficie(int nºmatriz) {
@@ -24,7 +57,7 @@ public class Buscaminas {
 
     private static void mostrarMapa(int[][] superficie) {
         System.out.println("  ===================");
-        System.out.println(" 1  2  3  4  5  6  7");
+        System.out.println("  1  2  3  4  5  6  7");
 
         for (int i = 0; i < superficie.length; i++) {
             System.out.print(i + "");
@@ -37,8 +70,6 @@ public class Buscaminas {
         System.out.println("  ===================");
     }
 
-
-
     private static void colocarMinas(int[][] superficie, int NUMERO_MINAS) {
         int minasColocadas = 0;
         do {
@@ -50,5 +81,5 @@ public class Buscaminas {
             }
 
         } while (minasColocadas < NUMERO_MINAS);
-}
+    }
 }
