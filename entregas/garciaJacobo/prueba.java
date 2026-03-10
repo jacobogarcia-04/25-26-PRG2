@@ -15,7 +15,7 @@ class Fecha {
 
     public Fecha(String fechaTexto);
 
-    public boolean esBisiesto();
+    public boolean estasEnAñoBisiesto();
 
     public int diasDelMes();
 
@@ -79,4 +79,4 @@ class Intervalo {
 
 }
 
-}
+
