@@ -69,7 +69,7 @@ class Intervalo {
 
     public void editar()
 
-    public Intervalo[] cortar(int trozos)
+    public Intervalo[] cortar(int trozos);
 
     public Intervalo union(Intervalo intervalo)
 
