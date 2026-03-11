@@ -1,7 +1,5 @@
 
-
-
-    package entregas.garciaJacobo;
+package entregas.garciaJacobo;
 
 class Fecha {
 
@@ -78,5 +76,3 @@ class Intervalo {
     public double puntoMedio();
 
 }
-
-

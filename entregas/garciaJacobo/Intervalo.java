@@ -1,4 +1,4 @@
-package vistas.intervalo;
+package vistas.Intervalo;
 
 class Intervalo {
     private double superior;
