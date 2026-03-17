@@ -134,4 +134,14 @@ class Intervalo {
     public double puntoMedio() {
         return inferior + this.longitud() / 2;
     }
+
+    public static void main(String[] args) {
+        Intervalo intervalo = new Intervalo(5, 10);
+        intervalo.mostrar();
+        Intervalo otroIntervalo = intervalo.clone();
+        otroIntervalo.desplazar(10);
+        otroIntervalo.mostrar();
+
+    }
+
 }
