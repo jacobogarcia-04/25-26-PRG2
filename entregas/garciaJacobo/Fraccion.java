@@ -1,6 +1,6 @@
 package garciaJacobo;
 
-import java.io.Console;
+
 
 public class Fraccion {
     private int numerador;
@@ -19,13 +19,14 @@ public class Fraccion {
         assert denominador != 0;
         this.numerador = numerador;
         this.denominador = denominador;
+        this.simplificar();
     }
 
     public Fraccion(int numero) {
         this.numerador = numero;
         this.denominador = 1;
     }
-    
+
     public Fraccion(Fraccion fraccion) {
         this.numerador = fraccion.numerador;
         this.denominador = fraccion.denominador;
