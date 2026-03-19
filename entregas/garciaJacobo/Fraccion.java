@@ -25,7 +25,7 @@ public class Fraccion {
         this.numerador = numero;
         this.denominador = 1;
     }
-
+    
     public Fraccion(Fraccion fraccion) {
         this.numerador = fraccion.numerador;
         this.denominador = fraccion.denominador;
@@ -54,7 +54,6 @@ public class Fraccion {
     public void multiplicar(Fraccion fraccion) {
         int nuevoNumerador = (this.numerador * fraccion.numerador);
         int nuevoDenominador = (this.denominador * fraccion.denominador);
-
         this.numerador = nuevoNumerador;
         this.denominador = nuevoDenominador;
         this.simplificar();
@@ -64,7 +63,6 @@ public class Fraccion {
         assert fraccion.numerador != 0;
         int nuevoNumerador = (this.numerador * fraccion.denominador);
         int nuevoDenominador = (this.denominador * fraccion.numerador);
-
         this.numerador = nuevoNumerador;
         this.denominador = nuevoDenominador;
         this.simplificar();
@@ -83,7 +81,7 @@ public class Fraccion {
     }
 
     public void mostrar() {
-      System.out.println (this.numerador + "/" + this.denominador);
+        System.out.println(this.numerador + "/" + this.denominador);
     }
 
     public void inversa() {
@@ -101,7 +99,6 @@ public class Fraccion {
 
     public void simplificar() {
         int maximoComunDivisor = calcularMCD(numerador, denominador);
-
         this.numerador = this.numerador / maximoComunDivisor;
         this.denominador = this.denominador / maximoComunDivisor;
     }
