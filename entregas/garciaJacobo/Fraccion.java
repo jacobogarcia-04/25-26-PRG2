@@ -1,10 +1,22 @@
 package garciaJacobo;
 
-
-
 public class Fraccion {
+
     private int numerador;
     private int denominador;
+
+    public Fraccion(int numerador, int denominador) {
+        assert denominador != 0;
+        this.numerador = numerador;
+        this.denominador = denominador;
+        this.simplificar();
+    }
+
+    public void simplificar() {
+        int maximoComunDivisor = calcularMCD(numerador, denominador);
+        this.numerador = this.numerador / maximoComunDivisor;
+        this.denominador = this.denominador / maximoComunDivisor;
+    }
 
     private int calcularMCD(int numerador, int denominador) {
         while (denominador != 0) {
@@ -13,13 +25,6 @@ public class Fraccion {
             numerador = temporal;
         }
         return numerador;
-    }
-
-    public Fraccion(int numerador, int denominador) {
-        assert denominador != 0;
-        this.numerador = numerador;
-        this.denominador = denominador;
-        this.simplificar();
     }
 
     public Fraccion(int numero) {
@@ -45,10 +50,10 @@ public class Fraccion {
     }
 
     public void restar(Fraccion fraccion) {
-        int nuevoNumerador = (this.numerador * fraccion.denominador - fraccion.numerador * this.denominador);
-        int nuevoDenominador = (this.denominador * fraccion.denominador);
-        this.numerador = nuevoNumerador;
-        this.denominador = nuevoDenominador;
+        int numerador = (this.numerador * fraccion.denominador - fraccion.numerador * this.denominador);
+        int denominador = (this.denominador * fraccion.denominador);
+        this.numerador = numerador;
+        this.denominador = denominador;
         this.simplificar();
     }
 
@@ -78,7 +83,7 @@ public class Fraccion {
     }
 
     public boolean equals(Fraccion fraccion) {
-        return this.numerador * fraccion.denominador == this.denominador * fraccion.numerador;
+        return !this.esMayor(fraccion) && !this.esMenor(fraccion);
     }
 
     public void mostrar() {
@@ -98,9 +103,4 @@ public class Fraccion {
         this.numerador = this.numerador * -1;
     }
 
-    public void simplificar() {
-        int maximoComunDivisor = calcularMCD(numerador, denominador);
-        this.numerador = this.numerador / maximoComunDivisor;
-        this.denominador = this.denominador / maximoComunDivisor;
-    }
 }
