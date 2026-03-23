@@ -4,6 +4,14 @@ class Intervalo {
     private double puntoMedio;
     private double longitud;
 
+    private double getSuperior() {
+        return puntoMedio + longitud / 2;
+    }
+
+    private double getInferior() {
+        return puntoMedio - longitud / 2;
+    }
+
     public Intervalo(double puntoMedio, double longitud) {
         this.longitud = longitud;
         this.puntoMedio = puntoMedio;
@@ -32,7 +40,7 @@ class Intervalo {
 
     public void desplazar(double desplazamiento) {
 
-      puntoMedio=puntoMedio+desplazamiento;
+        puntoMedio = puntoMedio + desplazamiento;
 
     }
 
@@ -42,20 +50,19 @@ class Intervalo {
         intervalo.desplazar(desplazamiento);
         return intervalo;
 
-       
     }
 
     public boolean incluye(double punto) {
 
-        return puntoMedio - longitud / 2 <= punto && punto <= puntoMedio + longitud / 2;
+        return getInferior()<= punto && punto <=getSuperior();
 
     }
 
     public boolean incluye(Intervalo intervalo) {
         assert intervalo != null;
 
-        return this.incluye(intervalo.puntoMedio - intervalo.longitud / 2)
-                && this.incluye(intervalo.puntoMedio + intervalo.longitud / 2);
+        return this.incluye(intervalo.getInferior())
+                && this.incluye(intervalo.getSuperior());
 
     }
 
@@ -67,36 +74,26 @@ class Intervalo {
 
     public boolean intersecta(Intervalo intervalo) {
         assert intervalo != null;
-        return this.incluye(intervalo.puntoMedio - longitud / 2) ||
-                this.incluye(intervalo.puntoMedio + longitud / 2) ||
+        return this.incluye(intervalo.getInferior()) ||
+                this.incluye(intervalo.getSuperior()) ||
                 intervalo.incluye(this);
     }
 
     public Intervalo interseccion(Intervalo intervalo) {
         assert this.intersecta(intervalo);
-        double inferior = this.puntoMedio - this.longitud / 2;
-        double superior = this.puntoMedio + this.longitud / 2;
-        double intervaloInferior = intervalo.puntoMedio - longitud / 2;
-        double intervaloSuperior = intervalo.puntoMedio + longitud / 2;
-
-        if (this.incluye(intervalo)) {
+           if (this.incluye(intervalo)) {
             return intervalo.clone();
         } else if (intervalo.incluye(this)) {
             return this.clone();
-        } else if (this.incluye(intervaloInferior)) {
-            return new Intervalo(intervaloInferior, superior);
+        } else if (this.incluye(intervalo.getInferior())) {
+            return new Intervalo(intervalo.getInferior(), getSuperior());
         } else {
-            return new Intervalo(inferior, intervaloSuperior);
+            return new Intervalo(getInferior(), intervalo.getSuperior());
         }
     }
 
     public void oponer() {
-        double inferior = this.puntoMedio - this.longitud / 2;
-        double superior = this.puntoMedio + this.longitud / 2;
-        double superiorInicial = superior;
-
-        superior = -inferior;
-        inferior = -superiorInicial;
+     puntoMedio=-puntoMedio;
     }
 
     public void doblar() {
@@ -106,10 +103,9 @@ class Intervalo {
 
     public void mostrar() {
         Console console = new Console();
-        double inferior = this.puntoMedio - this.longitud / 2;
-        double superior = this.puntoMedio + this.longitud / 2;
+       
 
-        console.writeln("[" + inferior + "," + superior + "]");
+       console.writeln("[" + this.getInferior() + "," + this.getSuperior() + "]");
     }
 
     public void recoger() {
@@ -127,7 +123,7 @@ class Intervalo {
         assert trozos > 1;
 
         Intervalo[] intervalos = new Intervalo[trozos];
-        double inferior = this.puntoMedio - longitud / 2;
+        double inferior = this.getInferior();
         double longitud = this.longitud() / trozos;
         for (int i = 0; i < trozos; i++) {
             intervalos[i] = new Intervalo(inferior, inferior + longitud);
@@ -137,8 +133,9 @@ class Intervalo {
     }
 
     public Intervalo union(Intervalo intervalo) {
-        assert this.intersecta(intervalo) && !intervalo.incluye(this);
-        return this.interseccion(intervalo);
+       double nuevoInferior=Math.min(this.getInferior(),intervalo.getInferior());
+       double nuevoSuperior=Math.min(this.getSuperior(),intervalo.getSuperior());
+       return new Intervalo(nuevoInferior,nuevoSuperior);
     }
 
     public double puntoMedio() {
