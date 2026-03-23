@@ -44,49 +44,52 @@ class Intervalo {
     }
 
     public boolean incluye(double punto) {
-        return inferior <= punto && punto <= superior;
+        return this.inferior <= punto && punto <= this.superior;
     }
 
     public boolean incluye(Intervalo intervalo) {
         assert intervalo != null;
-        return this.incluye(intervalo.inferior) &&
-                this.incluye(intervalo.superior);
+
+        return this.incluye(intervalo.inferior) && this.incluye(intervalo.superior);
     }
 
     public boolean equals(Intervalo intervalo) {
-        assert intervalo != null;
 
-        return inferior == intervalo.inferior &&
-                superior == intervalo.superior;
+        return this.inferior == intervalo.inferior && this.superior == intervalo.superior;
     }
 
     public Intervalo interseccion(Intervalo intervalo) {
+        if (this.incluye(intervalo)) {
+            return intervalo.clone();
+        } else if (intervalo.incluye(this)) {
+            return this.clone();
+        } else if (this.incluye(intervalo.inferior)) {
+            return new Intervalo(intervalo.inferior, superior);
+        } else {
+            return new Intervalo(inferior, intervalo.superior);
+        }
 
     }
 
     public boolean intersecta(Intervalo intervalo) {
-
-        return this.incluye(intervalo.inferior) ||
-                this.incluye(intervalo.superior) ||
-                intervalo.incluye(this);
+        return this.incluye(intervalo.inferior) || this.incluye(intervalo.superior);
     }
 
     public void oponer() {
-        double superiorInicial = superior;
+        double superiorTemporal=superior;
 
-        superior = -inferior;
-        inferior = -superiorInicial;
+        superior=-inferior;
+        inferior=-superiorTemporal;
     }
 
     public void doblar() {
-        double longitudInicial = this.longitud();
-
-        inferior = inferior - longitudInicial / 2;
-        superior = superior + longitudInicial / 2;
+     double longitudInicial=this.longitud();
+     inferior=inferior-longitudInicial/2;
+     superior=superior+longitudInicial/2;
     }
 
     public void mostrar() {
-
+        console.writeln(inferior+","+superior);
     }
 
     public void recoger() {
