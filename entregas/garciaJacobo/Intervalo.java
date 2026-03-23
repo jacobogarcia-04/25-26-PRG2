@@ -1,4 +1,3 @@
-package vistas.intervalo;
 
 class Intervalo {
 
@@ -33,11 +32,7 @@ class Intervalo {
 
     public void desplazar(double desplazamiento) {
 
-        double inferior = puntoMedio - longitud / 2;
-        double superior = puntoMedio + longitud / 2;
-
-        inferior = inferior + desplazamiento;
-        superior = superior + desplazamiento;
+      puntoMedio=puntoMedio+desplazamiento;
 
     }
 
@@ -47,7 +42,7 @@ class Intervalo {
         intervalo.desplazar(desplazamiento);
         return intervalo;
 
-        return new Intervalo(puntoMedio + desplazamiento, longitud);
+       
     }
 
     public boolean incluye(double punto) {
@@ -105,13 +100,13 @@ class Intervalo {
     }
 
     public void doblar() {
-        
-     longitud=longitud*2;
+
+        longitud = longitud * 2;
     }
 
     public void mostrar() {
-           Console console = new Console();
-         double inferior = this.puntoMedio - this.longitud / 2;
+        Console console = new Console();
+        double inferior = this.puntoMedio - this.longitud / 2;
         double superior = this.puntoMedio + this.longitud / 2;
 
         console.writeln("[" + inferior + "," + superior + "]");
@@ -124,7 +119,7 @@ class Intervalo {
         do {
             puntoMedio = console.readDouble("Punto medio?");
             longitud = console.readDouble("longitud?");
-            valido = longitud>0;
+            valido = longitud > 0;
         } while (!valido);
     }
 
@@ -132,7 +127,7 @@ class Intervalo {
         assert trozos > 1;
 
         Intervalo[] intervalos = new Intervalo[trozos];
-        double inferior = this.puntoMedio-longitud/2;
+        double inferior = this.puntoMedio - longitud / 2;
         double longitud = this.longitud() / trozos;
         for (int i = 0; i < trozos; i++) {
             intervalos[i] = new Intervalo(inferior, inferior + longitud);
