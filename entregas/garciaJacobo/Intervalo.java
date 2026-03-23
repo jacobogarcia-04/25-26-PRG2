@@ -134,7 +134,7 @@ class Intervalo {
 
     public Intervalo union(Intervalo intervalo) {
        double nuevoInferior=Math.min(this.getInferior(),intervalo.getInferior());
-       double nuevoSuperior=Math.min(this.getSuperior(),intervalo.getSuperior());
+       double nuevoSuperior=Math.max(this.getSuperior(),intervalo.getSuperior());
        return new Intervalo(nuevoInferior,nuevoSuperior);
     }
 
