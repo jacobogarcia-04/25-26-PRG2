@@ -1,4 +1,3 @@
-package garciaJacobo;
 
 public class Cliente {
 
