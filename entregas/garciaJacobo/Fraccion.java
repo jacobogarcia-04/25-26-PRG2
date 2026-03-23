@@ -4,7 +4,7 @@ public class Fraccion {
     public Fraccion(Fraccion fraccion){}
 
     public Fraccion clonar(){}
-   .
+   
    
    public void sumar(Fraccion fraccion){}
    public void restar(Fraccion fraccion){}

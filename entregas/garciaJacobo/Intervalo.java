@@ -89,7 +89,7 @@ class Intervalo {
 
     public void mostrar() {
         Console console = new Console();
-        console.writeln(inferior + "," + superior);
+        console.writeln("["+inferior+ "," + superior+"]" );
     }
 
     public void recoger() {
@@ -117,7 +117,7 @@ class Intervalo {
 
     public Intervalo union(Intervalo intervalo) {
         double nuevoInferior = Math.min(inferior, intervalo.inferior);
-        double nuevoSuperior = Math.max(inferior, intervalo.inferior);
+        double nuevoSuperior = Math.max(superior,intervalo.superior);
         return new Intervalo(nuevoInferior, nuevoSuperior);
     }
 
