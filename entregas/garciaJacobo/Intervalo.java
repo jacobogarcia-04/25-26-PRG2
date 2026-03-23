@@ -1,4 +1,3 @@
-package vistas.Intervalo;
 
 class Intervalo {
     private double superior;
@@ -76,36 +75,54 @@ class Intervalo {
     }
 
     public void oponer() {
-        double superiorTemporal=superior;
+        double superiorTemporal = superior;
 
-        superior=-inferior;
-        inferior=-superiorTemporal;
+        superior = -inferior;
+        inferior = -superiorTemporal;
     }
 
     public void doblar() {
-     double longitudInicial=this.longitud();
-     inferior=inferior-longitudInicial/2;
-     superior=superior+longitudInicial/2;
+        double longitudInicial = this.longitud();
+        inferior = inferior - longitudInicial / 2;
+        superior = superior + longitudInicial / 2;
     }
 
     public void mostrar() {
-        console.writeln(inferior+","+superior);
+        Console console = new Console();
+        console.writeln(inferior + "," + superior);
     }
 
     public void recoger() {
+        Console console = new Console();
+        boolean esValido = false;
 
+        do {
+            inferior = console.readDouble("Valor inferior?");
+            superior = console.readDouble("Valor superior?");
+            esValido = superior >= inferior;
+        } while (!esValido);
     }
 
     public Intervalo[] trocear(int numeroTrozos) {
-
+        assert numeroTrozos > 1;
+        Intervalo[] intervalo = new Intervalo[numeroTrozos];
+        double inferior = this.inferior;
+        double longitud = this.longitud() / numeroTrozos;
+        for (int i = 0; i <= numeroTrozos; i++) {
+            intervalo[i] = new Intervalo(inferior, inferior + longitud);
+            inferior = inferior + longitud;
+        }
+        return intervalo;
     }
 
     public Intervalo union(Intervalo intervalo) {
-
+        double nuevoInferior = Math.min(inferior, intervalo.inferior);
+        double nuevoSuperior = Math.max(inferior, intervalo.inferior);
+        return new Intervalo(nuevoInferior, nuevoSuperior);
     }
 
     public double puntoMedio() {
-
-    };
+        return superior - inferior / 2;
+    }
 
 }
