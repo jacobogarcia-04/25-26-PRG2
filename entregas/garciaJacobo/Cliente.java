@@ -73,7 +73,7 @@ class Cliente {
         console.writeln("[0,10] equals [0,9]: " + base.equals(new Intervalo(0, 9)));
 
         console.writeln("> Intersecta / Interseccion");
-        Intervalo a = new Intervalo(0, 10);
+        Intervalo a = new Intervalo(5, 10);
         Intervalo b = new Intervalo(5, 15);
         Intervalo c = new Intervalo(3, 7);
         Intervalo d = new Intervalo(20, 25);

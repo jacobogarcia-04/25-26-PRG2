@@ -4,14 +4,6 @@ class Intervalo {
     private double puntoMedio;
     private double longitud;
 
-    private double getSuperior() {
-        return puntoMedio + longitud / 2;
-    }
-
-    private double getInferior() {
-        return puntoMedio - longitud / 2;
-    }
-
     public Intervalo(double puntoMedio, double longitud) {
         this.longitud = longitud;
         this.puntoMedio = puntoMedio;
@@ -54,8 +46,16 @@ class Intervalo {
 
     public boolean incluye(double punto) {
 
-        return getInferior()<= punto && punto <=getSuperior();
+        return getInferior() <= punto && punto <= getSuperior();
 
+    }
+
+    private double getSuperior() {
+        return puntoMedio + longitud / 2;
+    }
+
+    private double getInferior() {
+        return puntoMedio - longitud / 2;
     }
 
     public boolean incluye(Intervalo intervalo) {
@@ -81,7 +81,7 @@ class Intervalo {
 
     public Intervalo interseccion(Intervalo intervalo) {
         assert this.intersecta(intervalo);
-           if (this.incluye(intervalo)) {
+        if (this.incluye(intervalo)) {
             return intervalo.clone();
         } else if (intervalo.incluye(this)) {
             return this.clone();
@@ -93,7 +93,7 @@ class Intervalo {
     }
 
     public void oponer() {
-     puntoMedio=-puntoMedio;
+        puntoMedio = -puntoMedio;
     }
 
     public void doblar() {
@@ -103,9 +103,8 @@ class Intervalo {
 
     public void mostrar() {
         Console console = new Console();
-       
 
-       console.writeln("[" + this.getInferior() + "," + this.getSuperior() + "]");
+        console.writeln("[" + this.getInferior() + "," + this.getSuperior() + "]");
     }
 
     public void recoger() {
@@ -133,9 +132,11 @@ class Intervalo {
     }
 
     public Intervalo union(Intervalo intervalo) {
-       double nuevoInferior=Math.min(this.getInferior(),intervalo.getInferior());
-       double nuevoSuperior=Math.max(this.getSuperior(),intervalo.getSuperior());
-       return new Intervalo(nuevoInferior,nuevoSuperior);
+        double nuevoInferior = Math.min(this.getInferior(), intervalo.getInferior());
+        double nuevoSuperior = Math.max(this.getSuperior(), intervalo.getSuperior());
+        double nuevoPuntoMedio = (nuevoSuperior + nuevoInferior) / 2;
+        double nuevaLongitud = nuevoSuperior - nuevoInferior;
+        return new Intervalo(nuevoPuntoMedio, nuevaLongitud);
     }
 
     public double puntoMedio() {
