@@ -8,6 +8,7 @@ public class Cliente {
         Fraccion fraccionPrueba2 = new Fraccion(2, 7);
         Fraccion fraccionPrueba3 = new Fraccion(4);
         Fraccion fraccionPrueba4 = new Fraccion(3, 5);
+        Fraccion fraccionPrueba = new Fraccion(3, 5);
 
         fraccionPrueba1.mostrar();
         fraccionPrueba2.mostrar();
