@@ -1,7 +1,8 @@
 package entregas.garciaJacobo;
+
 public class Actividades {
 
-    private String nombre; //cambio del nombre atributo
+    private String nombre; // cambio del nombre atributo
     private String monitor;
     private int aforo;
     private int inscritos;
@@ -21,7 +22,7 @@ public class Actividades {
         return this.aforo - this.inscritos;
     }
 
-    public String obtenerNombre() { // cambio nombre 
+    public String obtenerNombre() { // cambio nombre
         return this.nombre
                 + (this.estaLlena() ? " (AFORO COMPLETO)" : " (Libres: " + this.calcularPlazasLibres() + ")");
     }
@@ -42,18 +43,19 @@ public class Actividades {
                 : "");
     }
 
-    public void inscribirSocio() {                   // cambio nombre de metodo Se renombró 
-                                                     // el método agregarActividad() a inscribirSocio() ya que su funcionalidad real     
-                                                         // consiste en gestionar la inscripción de socios y el control del aforo, mejorando así la claridad y la modularidad del código.
-      Console console = new Console();
+    public void inscribirSocio() { // cambio nombre de metodo Se renombró
+                                   // el método agregarActividad() a inscribirSocio() ya que su funcionalidad real
+                                   // consiste en gestionar la inscripción de socios y el control del aforo,
+                                   // mejorando así la claridad y la modularidad del código.
+        Console console = new Console();
         if (!this.estaLlena()) {
-          this.inscritos++;
-        console.writeln("  >> ¡Éxito! Socio inscrito en " + this.nombre);
-        console.writeln("  >> Estado actual -> Inscritos: " + this.inscritos + " | Aforo máximo: " + this.aforo);
-    } else {
-        console.writeln(""); 
-        console.writeln("   No se pudo agregar. La actividad " + this.nombre + " está llena.");
-        console.writeln("  [!] Capacidad máxima: " + this.aforo);
+            this.inscritos++;
+            console.writeln("  >> ¡Éxito! Socio inscrito en " + this.nombre);
+            console.writeln("  >> Estado actual -> Inscritos: " + this.inscritos + " | Aforo máximo: " + this.aforo);
+        } else {
+            console.writeln("");
+            console.writeln("   No se pudo agregar. La actividad " + this.nombre + " está llena.");
+            console.writeln("  [!] Capacidad máxima: " + this.aforo);
         }
     }
 }

@@ -13,7 +13,6 @@ public class Cliente {
 
         this.gimnasio = new Gimnasio("FitLife Center");
         this.menu = new Menu();
-        this.reservas = new Reservas();
 
     }
 
@@ -25,20 +24,22 @@ public class Cliente {
     private void ejecutar() {
         boolean salir = false;
         do {
+            console.cleanScreen();
             menu.mostrarMenu(); // se crea clase mostrarMenu por que es una tarea del menu no del cliente y asi
                                 // mismo que el menus devuelva la opcion pedida
             switch (menu.pedirOpcion()) {
                 case 1 -> gimnasio.mostrarActividades(); // se añade metodo para que el gimnasio tenga sus propias
                                                          // actividades y las muestre
                 case 2 -> this.inscribirSocio();// cliente pide datos al usuario para darlo de alta
-                case 3 -> reservas.realizar();
-                case 4 -> {
+                // case 3 -> reservas.realizar(); // se agrega metodo para realizar una reserva
+                case 4 -> gimnasio.mostrarSocios();
+                case 5 -> {
                     Actividades actividad = gimnasio.escogerActividad();
                     actividad.mostrarAforo();
                 } // se añade metdo en la clase gimnasio para que muestre el aforo de una unica
                   // actividad
-                case 5 -> reservas.cancelar();
-                case 6 -> salir = true;
+                  // case 6 -> reservas.cancelar(); // metodo para cancelar una reserva
+                case 7 -> salir = true;
 
             }
 
@@ -59,7 +60,8 @@ public class Cliente {
                 fechaAlta,
                 "ALTA");
 
-        socio.mostrarDatos();
+        gimnasio.agregarSocio(socio); // refactor: la gestión y almacenamiento de socios pasa a la clase Gimnasio
+        console.writeln("Socio incrito correctamente");
 
     }
 
