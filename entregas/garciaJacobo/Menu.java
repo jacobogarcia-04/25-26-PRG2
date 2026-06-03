@@ -19,7 +19,7 @@ public class Menu {
         console.writeln("3. Realizar reserva");
         console.writeln("4. Mostrar socios");
         console.writeln("5. Consultar aforo de actividad");
-        console.writeln("6. Cancelar reserva");
+        console.writeln("6. Mostrar reservas");
         console.writeln("7. Salir");
     }
 

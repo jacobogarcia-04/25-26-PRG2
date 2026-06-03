@@ -24,15 +24,7 @@ public class Socios {
         return this.nombre;
     }
 
-    public String obtenerDNI() { // cambio nombre
-        return this.dni;
-    }
-
-    public String obtenerFechaAlta() { // cambio nombre
-        return this.fechaAlta;
-    }
-
-    public String preguntarEstadoInscripcion() {
+    public String obtenerEstadoInscripcion() {
         if (this.estaActivo()) {
             return "Estado: El socio " + this.nombre + " está de ALTA."; // nombre
         } else {
@@ -44,6 +36,6 @@ public class Socios {
         console.writeln("Nombre: " + this.nombre);
         console.writeln("DNI: " + this.dni);
         console.writeln("Fecha de alta: " + this.fechaAlta);
-        console.writeln(this.preguntarEstadoInscripcion());
+        console.writeln(this.obtenerEstadoInscripcion());
     }
 }

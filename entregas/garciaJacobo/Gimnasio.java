@@ -13,11 +13,12 @@ public class Gimnasio {
         console = new Console();
         this.actividades = new Actividades[3]; // se reserva espacio para tres actividades y se incializan dichas
                                                // actividades
-        this.actividades[0] = new Actividades("Yoga", "Elena Ruiz", 5);
+        this.actividades[0] = new Actividades("Yoga", "Elena Ruiz", 1, new Horario("Lun/Vie", 10.0, 12.0)); // se añade
+                                                                                                            // horario
 
-        this.actividades[1] = new Actividades("Pilates", "Ana López", 8);
+        this.actividades[1] = new Actividades("Pilates", "Ana López", 8, new Horario("Mar/Vie", 9.0, 10.0));
 
-        this.actividades[2] = new Actividades("Spinning", "Carlos Pérez", 10);
+        this.actividades[2] = new Actividades("Spinning", "Carlos Pérez", 10, new Horario("Mier/Sab", 10.0, 12.0));
 
         this.socios = new Socios[MAXIMOS_SOCIOS];
         this.totalSocios = 0;
@@ -27,27 +28,25 @@ public class Gimnasio {
         return this.nombre;
     }
 
-    public void mostrarNombre() { // cambio en el nombre
-        console.writeln("Gimnasio: " + this.nombre);
-    }
-
     public void mostrarActividades() { // feat se agrega logica para mostrar las actividades del gimansio
         for (int i = 0; i < this.actividades.length; i++) {
             console.writeln(
                     (i + 1) + ". "
-                            + this.actividades[i].obtenerNombre());
+                            + this.actividades[i].obtenerNombre() + " " + this.actividades[i].obtenerHorario());
         }
     }
 
     public void agregarSocio(Socios socio) { // se agrega metodo y su logica para poder guardar lo socios del gimnasio
-        this.socios[this.totalSocios] = socio;
-
-        this.totalSocios++;
+        if (this.totalSocios < MAXIMOS_SOCIOS) {
+            this.socios[this.totalSocios] = socio;
+            this.totalSocios++;
+        }
 
     }
 
     public Actividades escogerActividad() { // se implementa la logica de escogerActividad
         this.mostrarActividades();
+        
         int opcion = this.console.readInt("Seleccione actividad:");
 
         return this.actividades[opcion - 1];
@@ -56,6 +55,8 @@ public class Gimnasio {
     public void mostrarSocios() {
         for (int i = 0; i < this.totalSocios; i++) { // SE AGREGA METODO MOSTRAR SOCIOS
             this.socios[i].mostrarDatos();
+            console.writeln("");
         }
+
     }
 }

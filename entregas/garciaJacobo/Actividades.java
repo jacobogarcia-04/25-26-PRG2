@@ -6,12 +6,28 @@ public class Actividades {
     private String monitor;
     private int aforo;
     private int inscritos;
+    private Horario horario; // se añade atributo de horario
 
-    public Actividades(String actividad, String monitor, int aforo) {
+    public Actividades(String actividad, String monitor, int aforo, Horario horario) { // se añade horario al
+                                                                                       // constructor
         this.nombre = actividad;
         this.monitor = monitor;
         this.aforo = aforo;
         this.inscritos = 0;
+        this.horario = horario;
+    }
+
+    public boolean reservarPlaza() {// se añade este metodo para que al reservar una plaza el aforo baje
+        if (this.estaLlena()) {
+            return false;
+        }
+
+        this.inscritos++;
+        return true;
+    }
+
+    public Horario obtenerHorario() { // se añade geter horario
+        return this.horario;
     }
 
     private boolean estaLlena() {
@@ -27,35 +43,9 @@ public class Actividades {
                 + (this.estaLlena() ? " (AFORO COMPLETO)" : " (Libres: " + this.calcularPlazasLibres() + ")");
     }
 
-    public String obtenerMonitor() {
-        return this.monitor;
-    }
-
     public void mostrarAforo() {
         Console console = new Console();
-        console.writeln("  [Aforo: " + this.aforo + " | Libres: " + this.calcularPlazasLibres() + "]");
+        console.writeln(" [Aforo: " + this.aforo + " | Libres: " + this.calcularPlazasLibres() + "]");
     }
 
-    public void mostrar() {
-        Console console = new Console();
-        console.write(!this.estaLlena()
-                ? this.nombre + " impartida por " + this.monitor
-                : "");
-    }
-
-    public void inscribirSocio() { // cambio nombre de metodo Se renombró
-                                   // el método agregarActividad() a inscribirSocio() ya que su funcionalidad real
-                                   // consiste en gestionar la inscripción de socios y el control del aforo,
-                                   // mejorando así la claridad y la modularidad del código.
-        Console console = new Console();
-        if (!this.estaLlena()) {
-            this.inscritos++;
-            console.writeln("  >> ¡Éxito! Socio inscrito en " + this.nombre);
-            console.writeln("  >> Estado actual -> Inscritos: " + this.inscritos + " | Aforo máximo: " + this.aforo);
-        } else {
-            console.writeln("");
-            console.writeln("   No se pudo agregar. La actividad " + this.nombre + " está llena.");
-            console.writeln("  [!] Capacidad máxima: " + this.aforo);
-        }
-    }
 }

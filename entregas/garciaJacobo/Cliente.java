@@ -10,16 +10,10 @@ public class Cliente {
     public Cliente() {
 
         this.console = new Console();
-
         this.gimnasio = new Gimnasio("FitLife Center");
         this.menu = new Menu();
         this.reservas = new Reservas();
 
-    }
-
-    public static void main(String[] args) {
-        new Cliente().ejecutar(); // "refactor: se limpia el main para que el cliente sea un escenario vivo y los
-                                  // objetos se comuniquen entre ellos
     }
 
     private void ejecutar() {
@@ -37,8 +31,9 @@ public class Cliente {
                 case 5 -> {
                     Actividades actividad = gimnasio.escogerActividad();
                     actividad.mostrarAforo();
-                } // se añade metdo en la clase gimnasio para que muestre el aforo de una unica
-                case 6 -> salir = true;
+                } // se añade metdo en la clase gimnasio para que muestre el aforo de una unica actividad selecionada
+                case 6-> reservas.mostrar();
+                case 7 -> salir = true;
 
             }
 
@@ -53,9 +48,17 @@ public class Cliente {
 
         Actividades actividad = gimnasio.escogerActividad();
 
-        String fecha = console.readString("Fecha de reserva: ");
+        boolean sePuedeReservar = actividad.reservarPlaza(); // se añade metodo para restar el aforo
 
-        reservas.realizar(socio, actividad.obtenerNombre(), fecha);
+        if (!sePuedeReservar) { // se agrega esto para que impida realizar reserva si la actividad esta completa 
+            console.writeln("No se puede realizar la reserva. Actividad completa.");
+        }else{
+            
+            String fecha = console.readString("Fecha de reserva: ");
+            reservas.realizar(socio, actividad.obtenerNombre(), fecha);
+            
+        }
+
     }
 
     private void inscribirSocio() { // se crea metodo incribir socios por que el cliente es el encargado de
@@ -77,4 +80,8 @@ public class Cliente {
 
     }
 
+    public static void main(String[] args) {
+        new Cliente().ejecutar(); // "refactor: se limpia el main para que el cliente sea un escenario vivo y los
+                                  // objetos se comuniquen entre ellos
+    }
 }

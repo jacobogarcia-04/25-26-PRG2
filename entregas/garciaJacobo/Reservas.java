@@ -18,7 +18,9 @@ public class Reservas {
         console = new Console();
     }
 
-    public void realizar(String socio, String actividad, String fecha) {
+    public void realizar(String socio, String actividad, String fecha) { // se agrega logica para guardar las reservas
+                                                                         // de cada socio con su correspodiente activida
+                                                                         // y fecha en sus matrices
 
         this.socios[this.totalReservas] = socio;
         this.actividades[this.totalReservas] = actividad;
@@ -29,7 +31,7 @@ public class Reservas {
         console.writeln("Reserva realizada correctamente.");
     }
 
-    public void mostrarReservas() {
+    public void mostrar() { // se agrega logica para mostrar las reservas
 
         for (int i = 0; i < this.totalReservas; i++) {
 
