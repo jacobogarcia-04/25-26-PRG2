@@ -21,4 +21,14 @@ public class Reservas {
         console.writeln("Actividad: " + this.nombreActividad);
         console.writeln("Fecha: " + this.fechaReserva);
     }
+
+    public Object realizar() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'realizar'");
+    }
+
+    public Object cancelar() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'cancelar'");
+    }
 }
