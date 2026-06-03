@@ -13,6 +13,7 @@ public class Cliente {
 
         this.gimnasio = new Gimnasio("FitLife Center");
         this.menu = new Menu();
+        this.reservas = new Reservas();
 
     }
 
@@ -31,19 +32,30 @@ public class Cliente {
                 case 1 -> gimnasio.mostrarActividades(); // se añade metodo para que el gimnasio tenga sus propias
                                                          // actividades y las muestre
                 case 2 -> this.inscribirSocio();// cliente pide datos al usuario para darlo de alta
-                // case 3 -> reservas.realizar(); // se agrega metodo para realizar una reserva
+                case 3 -> this.realizarReserva(); // se agrega metodo para realizar una reserva
                 case 4 -> gimnasio.mostrarSocios();
                 case 5 -> {
                     Actividades actividad = gimnasio.escogerActividad();
                     actividad.mostrarAforo();
                 } // se añade metdo en la clase gimnasio para que muestre el aforo de una unica
-                  // actividad
-                  // case 6 -> reservas.cancelar(); // metodo para cancelar una reserva
-                case 7 -> salir = true;
+                case 6 -> salir = true;
 
             }
 
         } while (!salir);
+    }
+
+    private void realizarReserva() { // logica de realizar reserva
+
+        console.writeln("===== NUEVA RESERVA =====");
+
+        String socio = console.readString("Nombre del socio: ");
+
+        Actividades actividad = gimnasio.escogerActividad();
+
+        String fecha = console.readString("Fecha de reserva: ");
+
+        reservas.realizar(socio, actividad.obtenerNombre(), fecha);
     }
 
     private void inscribirSocio() { // se crea metodo incribir socios por que el cliente es el encargado de

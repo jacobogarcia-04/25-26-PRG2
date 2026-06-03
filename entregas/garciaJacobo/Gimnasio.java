@@ -47,7 +47,7 @@ public class Gimnasio {
     }
 
     public Actividades escogerActividad() { // se implementa la logica de escogerActividad
-
+        this.mostrarActividades();
         int opcion = this.console.readInt("Seleccione actividad:");
 
         return this.actividades[opcion - 1];

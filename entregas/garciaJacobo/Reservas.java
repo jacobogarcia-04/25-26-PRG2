@@ -2,25 +2,42 @@ package entregas.garciaJacobo;
 
 public class Reservas {
 
-    private String nombreSocio; // nombre -> nombreSocio actividad -> nombreActividad fecha -> fechaReserva
-    private String nombreActividad;
-    private String fechaReserva;
+    private String[] socios;
+    private String[] actividades;
+    private String[] fechas;
 
-    public Reservas(String nombreSocio, String nombreActividad, String fechaReserva) {
+    private int totalReservas;
+    private Console console;
 
-        this.nombreSocio = nombreSocio;
-        this.nombreActividad = nombreActividad;
-        this.fechaReserva = fechaReserva;
+    public Reservas() {
+        this.socios = new String[100];
+        this.actividades = new String[100];
+        this.fechas = new String[100];
+
+        this.totalReservas = 0;
+        console = new Console();
     }
 
-    public void mostrarReserva() { // se añade metodo para mostrar reserva de un usario 
+    public void realizar(String socio, String actividad, String fecha) {
 
-        Console console = new Console();
+        this.socios[this.totalReservas] = socio;
+        this.actividades[this.totalReservas] = actividad;
+        this.fechas[this.totalReservas] = fecha;
 
-        console.writeln("Socio: " + this.nombreSocio);
-        console.writeln("Actividad: " + this.nombreActividad);
-        console.writeln("Fecha: " + this.fechaReserva);
+        this.totalReservas++;
+
+        console.writeln("Reserva realizada correctamente.");
     }
 
+    public void mostrarReservas() {
 
+        for (int i = 0; i < this.totalReservas; i++) {
+
+            console.writeln("Reserva " + (i + 1));
+            console.writeln("Socio: " + this.socios[i]);
+            console.writeln("Actividad: " + this.actividades[i]);
+            console.writeln("Fecha: " + this.fechas[i]);
+            console.writeln("");
+        }
+    }
 }

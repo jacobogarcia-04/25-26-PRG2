@@ -11,14 +11,14 @@ public class Menu {
         return console.readInt("");
     }
 
-    public void mostrarMenu() {// se agrega metodo y su logica para mostrar el menu 
+    public void mostrarMenu() {// se agrega metodo y su logica para mostrar el menu
         console.writeln("");
         console.writeln("===== GIMNASIO =====");
         console.writeln("1. Mostrar actividades");
         console.writeln("2. Inscribir socio");
-        console.writeln("3. Mostrar socios");
-        console.writeln("4. Consultar aforo");
-        console.writeln("5. Realizar reserva");
+        console.writeln("3. Realizar reserva");
+        console.writeln("4. Mostrar socios");
+        console.writeln("5. Consultar aforo de actividad");
         console.writeln("6. Cancelar reserva");
         console.writeln("7. Salir");
     }
