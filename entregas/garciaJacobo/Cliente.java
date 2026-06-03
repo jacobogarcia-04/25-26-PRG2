@@ -2,50 +2,65 @@ package entregas.garciaJacobo;
 
 public class Cliente {
 
-    public static void main(String[] args) {
+    private Console console;
+    private Gimnasio gimnasio;
+    private Reservas reservas;
+    private Menu menu;
 
-        Console console = new Console();
+    public Cliente() {
 
-        Gimnasio gimnasio = new Gimnasio("FitLife Center");
-        Actividades yoga = new Actividades("Yoga", "Elena Ruiz", 1);
-        Horario horYoga = new Horario("Lun/Vie", 10.0, 12.0);
-        Socios socio1 = new Socios("Juan García", "12345678A", "01/04/2025", "ALTA");
-        Socios socio2 = new Socios("Pablo Martinez ", "12345678A", "05/04/2025", "ALTA");
+        this.console = new Console();
 
-        gimnasio.mostrarNombre();
-        console.writeln("");
-
-        console.writeln("Actividades:");
-        console.writeln("  \"" + yoga.obtenerNombre() + "\" - Monitor/a: " + yoga.obtenerMonitor() + " - "
-                + horYoga.obtenerDia() + " " + horYoga.obtenerHoraInicio() + horYoga.obtenerHoraFin());
-        console.writeln("");
-
-        console.writeln("Socios:");
-        console.write("  \"" + socio1.obtenerNombre() + "\" - DNI: " + socio1.obtenerDNI());
-        console.writeln("  " + socio1.preguntarEstadoInscripcion());
-        console.writeln("");
-
-        console.write("  \"" + socio2.obtenerNombre() + "\" - DNI: " + socio2.obtenerDNI());
-        console.writeln("  " + socio2.preguntarEstadoInscripcion());
-        console.writeln("");
-
-        console.writeln("Reservas:");
-        Reservas res1 = new Reservas(socio1.obtenerNombre(), yoga.obtenerNombre(), "01/02/2026");
-        yoga.inscribirSocio();
-        console.write("  ->Socio: " + socio1.obtenerNombre());
-        yoga.mostrar();
-        yoga.mostrarAforo();
-        console.writeln("Fecha de la reserva: " + "1/02/2026");
-
-        console.writeln("");
-        console.writeln("----------------------------------------------------");
-        console.writeln("");
-
-        Reservas res2 = new Reservas(socio2.obtenerNombre(), yoga.obtenerNombre(), "01/02/2026");
-
-        console.write(" ->Socio " + socio2.obtenerNombre() + " ");
-        yoga.inscribirSocio();
-        yoga.mostrarAforo();
+        this.gimnasio = new Gimnasio("FitLife Center");
+        this.menu = new Menu();
+        this.reservas = new Reservas();
 
     }
+
+    public static void main(String[] args) {
+        new Cliente().ejecutar(); // "refactor: se limpia el main para que el cliente sea un escenario vivo y los
+                                  // objetos se comuniquen entre ellos
+    }
+
+    private void ejecutar() {
+        boolean salir = false;
+        do {
+            menu.mostrarMenu(); // se crea clase mostrarMenu por que es una tarea del menu no del cliente y asi
+                                // mismo que el menus devuelva la opcion pedida
+            switch (menu.pedirOpcion()) {
+                case 1 -> gimnasio.mostrarActividades(); // se añade metodo para que el gimnasio tenga sus propias
+                                                         // actividades y las muestre
+                case 2 -> this.inscribirSocio();// cliente pide datos al usuario para darlo de alta
+                case 3 -> reservas.realizar();
+                case 4 -> {
+                    Actividades actividad = gimnasio.escogerActividad();
+                    actividad.mostrarAforo();
+                } // se añade metdo en la clase gimnasio para que muestre el aforo de una unica
+                  // actividad
+                case 5 -> reservas.cancelar();
+                case 6 -> salir = true;
+
+            }
+
+        } while (!salir);
+    }
+
+    private void inscribirSocio() { // se crea metodo incribir socios por que el cliente es el encargado de
+                                    // preguntar el nombre del socio su denia y fecha de incripcion
+        String nombre = this.console.readString("Nombre:");
+
+        String dni = this.console.readString("DNI:");
+
+        String fechaAlta = this.console.readString("Fecha de alta:");
+
+        Socios socio = new Socios(
+                nombre,
+                dni,
+                fechaAlta,
+                "ALTA");
+
+        socio.mostrarDatos();
+
+    }
+
 }
