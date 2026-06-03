@@ -1,40 +1,39 @@
 package entregas.garciaJacobo;
-
 public class Socios {
 
-    private String nombreSocios;
+    private String nombre;          //cambio nombres de la variables a nombre fecha Alta lo mismo en el constructor
     private String dni;
-    private String fecha;
+    private String fechaAlta;       
     private String estadoInscripcion;
 
-    public Socios(String nombreSocios, String dni, String fecha, String estadoInscripcion) {
-        this.nombreSocios = nombreSocios;
+    public Socios(String nombre, String dni, String fechaAlta, String estadoInscripcion) {
+        this.nombre = nombre;
         this.dni = dni;
-        this.fecha = fecha;
+        this.fechaAlta = fechaAlta;
         this.estadoInscripcion = estadoInscripcion;
     }
 
-    private boolean estadoActivo() {
+    private boolean estaActivo() { // cambio nombre 
         return this.estadoInscripcion.equalsIgnoreCase("ALTA");
     }
 
-    public String preguntarNombreSocios() {
-        return this.nombreSocios;
+    public String obtenerNombre() { //cambio nombre
+        return this.nombre;
     }
 
-    public String preguntarDNI() {
+    public String obtenerDNI() { //cambio nombre
         return this.dni;
     }
 
-    public String preguntarFechaInscripcion() {
-        return this.fecha;
+    public String obtenerFechaAlta() { //cambio nombre 
+        return this.fechaAlta;
     }
 
     public String preguntarEstadoInscripcion() {
-        if (this.estadoActivo()) {
-            return "Estado: El socio " + this.nombreSocios + " está de ALTA.";
+        if (this.estaActivo()) {
+            return "Estado: El socio " + this.nombre + " está de ALTA."; //nombre 
         } else {
-            return "Estado: El socio " + this.nombreSocios + " está de BAJA.";
+            return "Estado: El socio " + this.nombre + " está de BAJA."; //nombre
         }
     }
 }

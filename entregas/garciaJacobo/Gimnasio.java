@@ -1,18 +1,18 @@
 package entregas.garciaJacobo;
 
 public class Gimnasio {
-    private String nombreGimnasio;
+    private String nombre; // cambio en el nombre del atributo 
 
     public Gimnasio(String nombreGimnasio) {
-        this.nombreGimnasio = nombreGimnasio;
+        this.nombre = nombre;
     }
 
-    public String nombrarGimnasio() {
-        return this.nombreGimnasio;
+    public String obtenerNombre() { // cambio en el nombre del metodo 
+        return this.nombre;
     }
 
-    public void mostrarNombreGimnasio() {
+    public void mostrarNombre() { // cambio en el nombre 
         Console console = new Console();
-        console.writeln("Gimnasio: " + this.nombreGimnasio);
+        console.writeln("Gimnasio: " + this.nombre);
     }
 }

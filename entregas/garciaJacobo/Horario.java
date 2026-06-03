@@ -1,5 +1,4 @@
 package entregas.garciaJacobo;
-
 public class Horario {
     private String dia;
     private double horaInicio;
@@ -11,20 +10,20 @@ public class Horario {
         this.horaFin = horaFin;
     }
 
-    public void mostrarHorario() {
+    public void mostrarHorario() { // cambio nombre
         Console console = new Console();
         console.writeln("Horario configurado: " + this.dia + " de " + this.horaInicio + " a " + this.horaFin);
     }
 
-    public String preguntarDia() {
+    public String obtenerDia() { // cambio nombre
         return this.dia;
     }
 
-    public String preguntarHoraInicio() {
+    public String obtenerHoraInicio() { // cambio nombre
         return "La actividad comienza a las: " + this.horaInicio;
     }
 
-    public String preguntarHoraFinal() {
+    public String obtenerHoraFin() { // cambio nombre
         return " y termina a las: " + this.horaFin;
     }
 
@@ -38,12 +37,11 @@ public class Horario {
     }
 
     private boolean comprobarDuracion() {
-        double duracionReal = this.horaFin - this.horaInicio;
-
+        
         double duracionEsperada = 2.0;
 
-        boolean duracionValida = (duracionReal == duracionEsperada);
+        return (this.horaFin-this.horaInicio)==duracionEsperada; // reduccion del codigo para que haga lo mismo.
 
-        return duracionValida;
+        
     }
 }
